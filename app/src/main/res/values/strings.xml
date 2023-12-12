@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DaareToDonor</string>
+    <string name="menu_home">Beranda</string>
+    <string name="menu_news">Berita &amp;vent</string>
+    <string name="menu_riwayat">Riwayat</string>
+    <string name="menu_profil">Profil</string>
+
 </resources>
