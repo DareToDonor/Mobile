@@ -16,6 +16,8 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import com.daaretodonor.navigation.NavigationItem.NavigationItem
 import com.daaretodonor.navigation.NavigationItem.Screen
+import com.daaretodonor.ui.screen.history.HistoryScreen
+import com.daaretodonor.ui.screen.home.HomeScreen
 import com.daaretodonor.ui.screen.profil.ProfileScreen
 import com.daaretodonor.ui.theme.DaareToDonorTheme
 
@@ -27,6 +29,7 @@ fun DareToDonor(
     navController: NavHostController = rememberNavController(),
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
     Scaffold(
         bottomBar = {
 
@@ -40,10 +43,13 @@ fun DareToDonor(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
-
+                HomeScreen()
             }
             composable(Screen.News.route) {
 
+            }
+            composable(Screen.History.route) {
+                HistoryScreen()
             }
             composable(Screen.Profile.route) {
               ProfileScreen()
@@ -76,12 +82,12 @@ private fun BottomBar(
             NavigationItem(
                 title = stringResource(R.string.menu_news),
                 iconResourceId = R.drawable.ic_news,
-                screen = Screen.Home
+                screen = Screen.Profile
             ),
             NavigationItem(
                 title = stringResource(R.string.menu_riwayat),
                 iconResourceId =  R.drawable.ic_clock,
-                screen = Screen.Home
+                screen = Screen.News
             ),
             NavigationItem(
                 title = stringResource(R.string.menu_profil),
@@ -109,7 +115,6 @@ private fun BottomBar(
                         restoreState = true
                         launchSingleTop = true
                     }
-
                 }
             )
         }

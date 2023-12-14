@@ -4,5 +4,6 @@
     <string name="menu_news">Berita &amp;vent</string>
     <string name="menu_riwayat">Riwayat</string>
     <string name="menu_profil">Profil</string>
+    <string name="back">Kembali</string>
 
 </resources>
