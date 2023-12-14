@@ -6,5 +6,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 data class NavigationItem(
     val title: String,
-    @DrawableRes val iconResourceId: Int? = null
+    @DrawableRes val iconResourceId: Int? = null,
+    val screen: Screen
 )
