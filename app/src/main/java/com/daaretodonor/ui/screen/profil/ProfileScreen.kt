@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.daaretodonor.R
+import com.daaretodonor.ui.components.ButtomEditProfil
 import com.daaretodonor.ui.theme.DaareToDonorTheme
 import com.daaretodonor.ui.theme.MainColor
 
@@ -55,24 +55,21 @@ fun ProfileScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.Center)
-                .padding(top = 30.dp)
+                .padding(top = 25.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = stringResource(R.string.menu_profil),
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
                 fontSize = 24.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth(),
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             Box(
                 modifier = Modifier
                     .size(120.dp)
                     .clip(MaterialTheme.shapes.medium)
-                    .align(Alignment.CenterHorizontally)
                     .background(Color.White)
             ) {
                 Image(
@@ -86,26 +83,20 @@ fun ProfileScreen(
 
                 )
             }
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(8.dp))
+
             Text(
                 text ="Mochamad Ramdhan",
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
                 fontSize = 30.sp,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth(),
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Row(
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(
                     imageVector =  Icons.Default.Place,
                     contentDescription = null,
-                    modifier = Modifier
-                        .size(18.dp)
-                        .align(Alignment.CenterVertically),
                     tint = Color.White
                 )
                 Text(
@@ -113,16 +104,17 @@ fun ProfileScreen(
                     fontWeight = FontWeight.Normal,
                     color = Color.White,
                     fontSize = 18.sp,
-                    textAlign = TextAlign.Center,
                     modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                        .padding(start = 8.dp)
+                        .padding(start = 5.dp)
                 )
             }
+            Spacer(modifier = Modifier.height(8.dp))
+            ButtomEditProfil()
+            Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(40.dp),
+                    .padding(40.dp)
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Box(
@@ -140,7 +132,6 @@ fun ProfileScreen(
             }
         }
     }
-
 }
 @Preview(showBackground = true)
 @Composable
