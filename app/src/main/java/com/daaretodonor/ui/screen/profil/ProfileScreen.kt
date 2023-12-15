@@ -35,13 +35,11 @@ import com.daaretodonor.R
 import com.daaretodonor.ui.components.ButtonEditProfil
 import com.daaretodonor.ui.components.ButtonLogout
 import com.daaretodonor.ui.theme.DaareToDonorTheme
-import com.daaretodonor.ui.theme.GrayBg
 import com.daaretodonor.ui.theme.MainColor
 
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier
-        .background(GrayBg),
 ) {
     Column {
     Box(
