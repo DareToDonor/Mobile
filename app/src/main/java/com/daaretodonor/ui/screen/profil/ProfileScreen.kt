@@ -12,9 +12,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Place
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -32,14 +38,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.daaretodonor.R
-import com.daaretodonor.ui.components.ButtomEditProfil
+import com.daaretodonor.ui.components.ButtonEditProfil
+import com.daaretodonor.ui.components.ButtonLogout
 import com.daaretodonor.ui.theme.DaareToDonorTheme
+import com.daaretodonor.ui.theme.GrayBg
 import com.daaretodonor.ui.theme.MainColor
 
 @Composable
 fun ProfileScreen(
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
+        .background(GrayBg),
 ) {
+    Column {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -109,7 +119,7 @@ fun ProfileScreen(
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
-            ButtomEditProfil()
+            ButtonEditProfil()
             Spacer(modifier = Modifier.height(8.dp))
             Row(
                 modifier = Modifier
@@ -131,6 +141,8 @@ fun ProfileScreen(
                 )
             }
         }
+    }
+        ButtonLogout()
     }
 }
 @Preview(showBackground = true)

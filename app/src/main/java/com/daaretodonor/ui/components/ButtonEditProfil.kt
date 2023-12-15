@@ -22,7 +22,7 @@ import com.daaretodonor.ui.theme.DaareToDonorTheme
 
 
 @Composable
-fun ButtomEditProfil(
+fun ButtonEditProfil(
 ) {
     Box(
         modifier = Modifier
@@ -46,6 +46,6 @@ fun ButtomEditProfil(
 @Composable
 fun GreetingPreview() {
     DaareToDonorTheme {
-        ButtomEditProfil()
+        ButtonEditProfil()
     }
 }
