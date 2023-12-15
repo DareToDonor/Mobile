@@ -7,4 +7,6 @@
     <string name="back">Kembali</string>
     <string name="edit_profil">Edit Profil</string>
     <string name="logout">Keluar</string>
+    <string name="count_donor">Total Donor</string>
+    <string name="gol_darah">Gol Darah</string>
 </resources>
