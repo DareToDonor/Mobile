@@ -2,6 +2,7 @@ package com.daaretodonor
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,7 +14,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,7 +39,6 @@ fun DareToDonor(
     val currentRoute = navBackStackEntry?.destination?.route
     Scaffold(
         bottomBar = {
-
                 BottomBar(navController = navController)
         },
         modifier = modifier
@@ -80,18 +79,15 @@ private fun BottomBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(
-                color = Color.White,
-                shape = RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp) // Adjust the radius as needed
-            )
-            .shadow(3.dp)
+            .border(width = 1.dp, color = Color.Gray)
+            .shadow(elevation = 2.dp, shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp))
     ) {
         NavigationBar(
-            containerColor = Color.White,
-            contentColor = Color.Black,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 7.dp)
+                .background(MaterialTheme.colorScheme.background),
+            contentColor = Color.Black,
+            containerColor = Color.Transparent,
         ) {
             val navigationItems = listOf(
                 NavigationItem(
@@ -137,8 +133,8 @@ private fun BottomBar(
                         }
                     }
                 )
-            }
 
+            }
         }
     }
 }
