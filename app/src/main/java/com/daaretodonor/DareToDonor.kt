@@ -23,6 +23,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.*
 import com.daaretodonor.navigation.NavigationItem.NavigationItem
 import com.daaretodonor.navigation.NavigationItem.Screen
+import com.daaretodonor.ui.screen.chatbot.ChatScreen
 import com.daaretodonor.ui.screen.history.HistoryScreen
 import com.daaretodonor.ui.screen.home.HomeScreen
 import com.daaretodonor.ui.screen.newsAndEvent.NewsAndEvent
@@ -56,7 +57,7 @@ fun DareToDonor(
                 NewsAndEvent()
             }
             composable(Screen.History.route) {
-                HistoryScreen()
+                ChatScreen()
             }
             composable(Screen.Profile.route) {
                 ProfileScreen()
