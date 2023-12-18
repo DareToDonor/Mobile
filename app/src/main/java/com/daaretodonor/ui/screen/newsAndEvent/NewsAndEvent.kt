@@ -1,4 +1,4 @@
-package com.daaretodonor.ui.screen.history
+package com.daaretodonor.ui.screen.newsAndEvent
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,7 +30,7 @@ import com.daaretodonor.ui.theme.DaareToDonorTheme
 import com.daaretodonor.ui.theme.MainColor
 
 @Composable
-fun HistoryScreen() {
+fun NewsAndEvent() {
     var selectedTabIndex by remember { mutableStateOf(0) }
 
     Column(
@@ -39,7 +39,7 @@ fun HistoryScreen() {
             .padding(16.dp)
     ) {
         Text(
-            text = stringResource(R.string.history),
+            text = stringResource(R.string.newsandevent),
             fontWeight = FontWeight.ExtraBold,
             color = MainColor,
             fontSize = 24.sp,
@@ -65,7 +65,7 @@ fun HistoryScreen() {
             Tab(
                 text = {
                     Text(
-                        stringResource(R.string.schedule),
+                        stringResource(R.string.news),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
                         color = if (selectedTabIndex == 0) MainColor else Color.Black
@@ -77,7 +77,7 @@ fun HistoryScreen() {
             Tab(
                 text = {
                     Text(
-                        stringResource(R.string.done),
+                        stringResource(R.string.event),
                         fontWeight = FontWeight.Bold,
                         fontSize = 20.sp,
                         color = if (selectedTabIndex == 1) MainColor else Color.Black
@@ -104,6 +104,6 @@ fun TabContent(content: String) {
 @Composable
 fun NewsAndEventPreview() {
     DaareToDonorTheme {
-        HistoryScreen()
+        NewsAndEvent()
     }
 }

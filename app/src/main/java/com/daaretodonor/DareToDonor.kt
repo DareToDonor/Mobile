@@ -25,6 +25,7 @@ import com.daaretodonor.navigation.NavigationItem.NavigationItem
 import com.daaretodonor.navigation.NavigationItem.Screen
 import com.daaretodonor.ui.screen.history.HistoryScreen
 import com.daaretodonor.ui.screen.home.HomeScreen
+import com.daaretodonor.ui.screen.newsAndEvent.NewsAndEvent
 import com.daaretodonor.ui.screen.profil.ProfileScreen
 import com.daaretodonor.ui.theme.DaareToDonorTheme
 
@@ -52,20 +53,20 @@ fun DareToDonor(
                 HomeScreen()
             }
             composable(Screen.News.route) {
-
+                NewsAndEvent()
             }
             composable(Screen.History.route) {
                 HistoryScreen()
             }
             composable(Screen.Profile.route) {
-              ProfileScreen()
+                ProfileScreen()
             }
         }
     }
 }
 @Preview(showBackground = true)
 @Composable
-fun TargetLovePreview() {
+fun DareToDonorPreview() {
     DaareToDonorTheme {
         DareToDonor()
     }
@@ -98,7 +99,7 @@ private fun BottomBar(
                 NavigationItem(
                     title = stringResource(R.string.menu_news),
                     iconResourceId = R.drawable.ic_news,
-                    screen = Screen.Profile
+                    screen = Screen.News
                 ),
                 NavigationItem(
                     title = stringResource(R.string.menu_riwayat),

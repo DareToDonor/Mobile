@@ -17,4 +17,10 @@
     <string name="popular_news">Berita Terpopuler</string>
     <string name="show_all">Lihat Semua</string>
     <string name="start_donor">Mulai Donor</string>
+    <string name="newsandevent">Berita &amp; Event</string>
+    <string name="news">Berita</string>
+    <string name="event">Event</string>
+    <string name="history">Riwayat</string>
+    <string name="schedule">Jadwal</string>
+    <string name="done">Selesai</string>
 </resources>

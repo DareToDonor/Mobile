@@ -161,7 +161,7 @@ fun ProfileScreen(
 }
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun ProfileScreenPreview() {
     DaareToDonorTheme {
         ProfileScreen()
     }

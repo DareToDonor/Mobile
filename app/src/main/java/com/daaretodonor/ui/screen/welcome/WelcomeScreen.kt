@@ -108,7 +108,7 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun WelcomeScreenPreview() {
     DaareToDonorTheme {
         WelcomeScreen()
     }
