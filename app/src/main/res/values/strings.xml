@@ -23,4 +23,12 @@
     <string name="history">Riwayat</string>
     <string name="schedule">Jadwal</string>
     <string name="done">Selesai</string>
+    <string name="signin">Masuk</string>
+    <string name="signup">Daftar</string>
+    <string name="teks_login">Halo, Silahkan masuk untuk melanjutkan!</string>
+    <string name="email">Email</string>
+    <string name="password">Passwod</string>
+    <string name="input_email">Masukan Email</string>
+    <string name="input_password">Masukan Passwod</string>
+    <string name="no_have_accout">Tidak Punya Akun?</string>
 </resources>

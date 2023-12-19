@@ -57,10 +57,10 @@ fun DareToDonor(
                 NewsAndEvent()
             }
             composable(Screen.History.route) {
-                ChatScreen()
+                HistoryScreen()
             }
             composable(Screen.Profile.route) {
-                ProfileScreen()
+                ChatScreen()
             }
         }
     }
@@ -105,7 +105,7 @@ private fun BottomBar(
                 NavigationItem(
                     title = stringResource(R.string.menu_riwayat),
                     iconResourceId = R.drawable.ic_clock,
-                    screen = Screen.News
+                    screen = Screen.History
                 ),
                 NavigationItem(
                     title = stringResource(R.string.menu_profil),
