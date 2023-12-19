@@ -44,19 +44,19 @@ fun SignIn(modifier: Modifier = Modifier) {
                 painter = painterResource(id = R.drawable.ic_arrow),
                 contentDescription = "image back",
                 modifier = Modifier
-                    .padding(top = 50.dp, start = 15.dp)
+                    .padding(top = 30.dp, start = 15.dp)
                     .size(30.dp)
             )
-            Spacer(modifier = Modifier.height(30.dp))
+            Spacer(modifier = Modifier.height(15.dp))
             Text(
-                modifier = Modifier.padding(25.dp),
+                modifier = Modifier.padding(20.dp),
                 text = stringResource(R.string.signin),
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White,
                 fontSize = 30.sp
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(10.dp))
             SignInForm(email = email, onEmailChange = { email = it }, password = password, onPasswordChange = { password = it })
         }
     }
