@@ -10,7 +10,8 @@ object ApiConfig {
     private const val BASE_URL = "https://daretodonor-backend-w565xl45jq-et.a.run.app/"
 
     fun createApiService(): ApiService {
-        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        val loggingInterceptor =
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -25,7 +26,8 @@ object ApiConfig {
     }
 
     fun getApiService(token: String): ApiService {
-        val loggingInterceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        val loggingInterceptor =
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
         val authInterceptor = Interceptor { chain ->
             val req = chain.request()
             val requestHeaders = req.newBuilder()

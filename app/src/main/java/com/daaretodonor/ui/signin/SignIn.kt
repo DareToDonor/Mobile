@@ -6,13 +6,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -38,8 +40,7 @@ fun SignIn(
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
+    var showPassword by remember { mutableStateOf(false) }
 
 
 
@@ -76,11 +77,14 @@ fun SignIn(
                 password = password,
                 onPasswordChange = { password = it },
                 onSignInClick = {
-                    viewModel.login()
-                }
+                    viewModel.login(email, password)
+                },
+                showPassword = showPassword,
+                onTogglePasswordVisibility = { showPassword = !showPassword }
             )
-            viewModel.loginResponse.observeAsState().value?.let { loginResponse ->
-                Log.d("respon","$loginResponse")
+
+            viewModel.loginSuccess.observeAsState().value?.let { loginResponse ->
+                Log.d("respon", "$loginResponse")
             }
 
 
@@ -95,7 +99,9 @@ fun SignInForm(
     password: String,
     onPasswordChange: (String) -> Unit,
     onSignInClick: () -> Unit,
-) {
+    showPassword: Boolean,
+    onTogglePasswordVisibility: () -> Unit
+)  {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -137,7 +143,15 @@ fun SignInForm(
                 value = password,
                 onValueChange = onPasswordChange,
                 keyboardType = KeyboardType.Password,
-                visualTransformation = PasswordVisualTransformation()
+                visualTransformation = if (showPassword) VisualTransformation.None else PasswordVisualTransformation(),
+                trailingIcon = {
+                    IconButton(onClick = { onTogglePasswordVisibility() }) {
+                        Image(
+                            painter = painterResource(id = if (showPassword) R.drawable.baseline_visibility_24 else R.drawable.baseline_visibility_off_24),
+                            contentDescription = "Toggle password visibility"
+                        )
+                    }
+                }
             )
             SignInButton(onClick = onSignInClick)
             Spacer(modifier = Modifier.weight(1f))
@@ -171,7 +185,8 @@ fun SignInTextField(
     value: String,
     onValueChange: (String) -> Unit,
     keyboardType: KeyboardType,
-    visualTransformation: VisualTransformation? = null
+    visualTransformation: VisualTransformation? = null,
+    trailingIcon: @Composable (() -> Unit)? = null
 ) {
     Text(
         text = label,
@@ -191,6 +206,8 @@ fun SignInTextField(
             keyboardType = keyboardType
         ),
         singleLine = true,
+        visualTransformation = visualTransformation ?: VisualTransformation.None,
+        trailingIcon = trailingIcon
     )
 }
 
