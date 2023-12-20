@@ -32,6 +32,8 @@
     <string name="input_password">Masukan Passwod</string>
     <string name="no_have_accout">Tidak Punya Akun?</string>
     <string name="join">Mari Bergabung</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="username">Username</string>
     <string name="no_hp">Nomor Hp</string>
     <string name="daftar">Daftar</string>

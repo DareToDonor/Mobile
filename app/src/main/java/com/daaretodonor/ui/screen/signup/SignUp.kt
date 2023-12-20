@@ -13,8 +13,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
@@ -54,6 +57,8 @@ fun SignUp(modifier: Modifier = Modifier) {
     var password by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }
+    var firstname by remember { mutableStateOf("") }
+    var lastname by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Box(
@@ -61,38 +66,48 @@ fun SignUp(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(MainColor)
     ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+                .verticalScroll(rememberScrollState())
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_arrow),
-                contentDescription = "image back",
-                modifier = Modifier
-                    .padding(top = 30.dp, start = 15.dp)
-                    .size(30.dp)
-            )
-            Spacer(modifier = Modifier.height(15.dp))
-            Text(
-                modifier = Modifier.padding(20.dp),
-                text = stringResource(R.string.signin),
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
-                fontSize = 30.sp
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-            SignInForm(
-                email = email,
-                onEmailChange = { email = it },
-                password = password,
-                onPasswordChange = { password = it },
-                phoneNumber = phoneNumber,
-                onPhoneNumberChange = { phoneNumber = it },
-                username = username,
-                onUsernameChange = { username = it }
-            )
+            item {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_arrow),
+                    contentDescription = "image back",
+                    modifier = Modifier
+                        .padding(top = 30.dp, start = 15.dp)
+                        .size(30.dp)
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(
+                    modifier = Modifier.padding(20.dp),
+                    text = stringResource(R.string.signin),
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.White,
+                    fontSize = 30.sp
+                )
             }
+
+            item {
+                Spacer(modifier = Modifier.height(10.dp))
+                SignInForm(
+                    email = email,
+                    onEmailChange = { email = it },
+                    password = password,
+                    onPasswordChange = { password = it },
+                    phoneNumber = phoneNumber,
+                    onPhoneNumberChange = { phoneNumber = it },
+                    username = username,
+                    onUsernameChange = { username = it },
+                    firstname = firstname,
+                    onFirstnameChange = { firstname = it },
+                    lastname = lastname,
+                    onLastnameChange = { lastname = it }
+                )
+            }
+        }
     }
 }
 
@@ -105,7 +120,11 @@ fun SignInForm(
     phoneNumber: String,
     onPhoneNumberChange: (String) -> Unit,
     username: String,
-    onUsernameChange: (String) -> Unit
+    onUsernameChange: (String) -> Unit,
+    firstname: String,
+    onFirstnameChange: (String) -> Unit,
+    lastname: String,
+    onLastnameChange: (String) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -129,6 +148,8 @@ fun SignInForm(
                 color = Color.Black,
                 fontSize = 30.sp,
             )
+            SignUpTextField(label = stringResource(R.string.first_name), value = firstname, onValueChange = onFirstnameChange, keyboardType = KeyboardType.Text)
+            SignUpTextField(label = stringResource(R.string.last_name), value = lastname, onValueChange = onLastnameChange, keyboardType = KeyboardType.Text)
             SignUpTextField(label = stringResource(R.string.username), value = username, onValueChange = onUsernameChange, keyboardType = KeyboardType.Text)
             SignUpTextField(label = stringResource(R.string.email), value = email, onValueChange = onEmailChange, keyboardType = KeyboardType.Email)
             SignUpTextField(label = stringResource(R.string.no_hp), value = phoneNumber, onValueChange = onPhoneNumberChange, keyboardType = KeyboardType.Phone)
