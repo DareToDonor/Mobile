@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.daaretodonor.R
 
 @Composable
-fun ButtonLogout (){
+fun ButtonLogout() {
     Button(
         onClick = {
         },
@@ -38,7 +38,7 @@ fun ButtonLogout (){
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Start
-        ){
+        ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_logout),
                 contentDescription = null,

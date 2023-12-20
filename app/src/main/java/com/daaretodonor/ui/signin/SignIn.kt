@@ -1,5 +1,6 @@
 package com.daaretodonor.ui.signin
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -7,29 +8,40 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.daaretodonor.R
-import com.daaretodonor.ui.theme.DaareToDonorTheme
+import com.daaretodonor.di.Injection
+import com.daaretodonor.ui.LoginViewModel
+import com.daaretodonor.ui.ViewModelFactory
 import com.daaretodonor.ui.theme.MainColor
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun SignIn(modifier: Modifier = Modifier) {
+fun SignIn(
+    modifier: Modifier = Modifier,
+    viewModel: LoginViewModel = viewModel(
+        factory = ViewModelFactory(Injection.provideRepository())
+    ),
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    val keyboardController = LocalSoftwareKeyboardController.current
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+
 
     Box(
         modifier = Modifier
@@ -57,13 +69,33 @@ fun SignIn(modifier: Modifier = Modifier) {
             )
 
             Spacer(modifier = Modifier.height(10.dp))
-            SignInForm(email = email, onEmailChange = { email = it }, password = password, onPasswordChange = { password = it })
+
+            SignInForm(
+                email = email,
+                onEmailChange = { email = it },
+                password = password,
+                onPasswordChange = { password = it },
+                onSignInClick = {
+                    viewModel.login()
+                }
+            )
+            viewModel.loginResponse.observeAsState().value?.let { loginResponse ->
+                Log.d("respon","$loginResponse")
+            }
+
+
         }
     }
 }
 
 @Composable
-fun SignInForm(email: String, onEmailChange: (String) -> Unit, password: String, onPasswordChange: (String) -> Unit) {
+fun SignInForm(
+    email: String,
+    onEmailChange: (String) -> Unit,
+    password: String,
+    onPasswordChange: (String) -> Unit,
+    onSignInClick: () -> Unit,
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -81,7 +113,7 @@ fun SignInForm(email: String, onEmailChange: (String) -> Unit, password: String,
                 .padding(16.dp),
         ) {
             Text(
-                text =  stringResource(R.string.welcome),
+                text = stringResource(R.string.welcome),
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.Black,
                 fontSize = 30.sp,
@@ -94,9 +126,20 @@ fun SignInForm(email: String, onEmailChange: (String) -> Unit, password: String,
                 fontSize = 12.sp,
                 modifier = Modifier.padding(bottom = 16.dp)
             )
-            SignInTextField(label = stringResource(R.string.email), value = email, onValueChange = onEmailChange, keyboardType = KeyboardType.Email)
-            SignInTextField(label = stringResource(R.string.password), value = password, onValueChange = onPasswordChange, keyboardType = KeyboardType.Password, visualTransformation = PasswordVisualTransformation())
-            SignInButton(onClick = {})
+            SignInTextField(
+                label = stringResource(R.string.email),
+                value = email,
+                onValueChange = onEmailChange,
+                keyboardType = KeyboardType.Email
+            )
+            SignInTextField(
+                label = stringResource(R.string.password),
+                value = password,
+                onValueChange = onPasswordChange,
+                keyboardType = KeyboardType.Password,
+                visualTransformation = PasswordVisualTransformation()
+            )
+            SignInButton(onClick = onSignInClick)
             Spacer(modifier = Modifier.weight(1f))
             Row(
                 modifier = Modifier
@@ -123,7 +166,13 @@ fun SignInForm(email: String, onEmailChange: (String) -> Unit, password: String,
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignInTextField(label: String, value: String, onValueChange: (String) -> Unit, keyboardType: KeyboardType, visualTransformation: VisualTransformation? = null) {
+fun SignInTextField(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    keyboardType: KeyboardType,
+    visualTransformation: VisualTransformation? = null
+) {
     Text(
         text = label,
         fontWeight = FontWeight.Normal,
@@ -157,10 +206,3 @@ fun SignInButton(onClick: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun SignInPreview() {
-    DaareToDonorTheme {
-        SignIn()
-    }
-}

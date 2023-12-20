@@ -27,7 +27,6 @@ import com.daaretodonor.ui.screen.chatbot.ChatScreen
 import com.daaretodonor.ui.screen.history.HistoryScreen
 import com.daaretodonor.ui.screen.home.HomeScreen
 import com.daaretodonor.ui.screen.newsAndEvent.NewsAndEvent
-import com.daaretodonor.ui.screen.profil.ProfileScreen
 import com.daaretodonor.ui.theme.DaareToDonorTheme
 
 
@@ -41,7 +40,7 @@ fun DareToDonor(
     val currentRoute = navBackStackEntry?.destination?.route
     Scaffold(
         bottomBar = {
-                BottomBar(navController = navController)
+            BottomBar(navController = navController)
         },
         modifier = modifier
     ) { innerPadding ->
@@ -65,6 +64,7 @@ fun DareToDonor(
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun DareToDonorPreview() {

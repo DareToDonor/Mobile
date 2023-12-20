@@ -42,123 +42,123 @@ fun ProfileScreen(
     modifier: Modifier = Modifier
 ) {
     Column {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .size(height = 500.dp, width = 400.dp)
-            .clip(
-                MaterialTheme.shapes.medium.copy(
-                    topEnd = CornerSize(0.dp),
-                    topStart = CornerSize(0.dp),
-                )
-            )
-            .background(MainColor)
-    ) {
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 25.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .size(height = 500.dp, width = 400.dp)
+                .clip(
+                    MaterialTheme.shapes.medium.copy(
+                        topEnd = CornerSize(0.dp),
+                        topStart = CornerSize(0.dp),
+                    )
+                )
+                .background(MainColor)
         ) {
-            Text(
-                text = stringResource(R.string.menu_profil),
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
-                fontSize = 24.sp,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Box(
+            Column(
                 modifier = Modifier
-                    .size(120.dp)
-                    .clip(MaterialTheme.shapes.medium)
-                    .background(Color.White)
+                    .fillMaxWidth()
+                    .padding(top = 25.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_launcher_background),
-                    contentDescription = "profil",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(7.dp)
-                        .clip(MaterialTheme.shapes.medium),
-
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Text(
-                text ="Mochamad Ramdhan",
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.White,
-                fontSize = 30.sp,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-            ) {
-                Icon(
-                    imageVector =  Icons.Default.Place,
-                    contentDescription = null,
-                    tint = Color.White
-                )
                 Text(
-                    text = "Bandung, Jawa Barat",
-                    fontWeight = FontWeight.Normal,
+                    text = stringResource(R.string.menu_profil),
+                    fontWeight = FontWeight.ExtraBold,
                     color = Color.White,
-                    fontSize = 18.sp,
-                    modifier = Modifier
-                        .padding(start = 5.dp)
+                    fontSize = 24.sp,
                 )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            ButtonEditProfil()
-            Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                modifier = Modifier
-                    .padding(40.dp)
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
+                Spacer(modifier = Modifier.height(8.dp))
                 Box(
                     modifier = Modifier
-                        .size(100.dp)
+                        .size(120.dp)
                         .clip(MaterialTheme.shapes.medium)
                         .background(Color.White)
-                        .wrapContentSize(Alignment.BottomCenter)
-                )
-                {
-                    Text(
-                    text = stringResource(R.string.gol_darah),
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Black,
-                    fontSize = 12.sp,
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_launcher_background),
+                        contentDescription = "profil",
+                        contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .padding( 5.dp)
+                            .fillMaxSize()
+                            .padding(7.dp)
+                            .clip(MaterialTheme.shapes.medium),
+
+                        )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+
+                Text(
+                    text = "Mochamad Ramdhan",
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.White,
+                    fontSize = 30.sp,
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Row {
+                    Icon(
+                        imageVector = Icons.Default.Place,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                    Text(
+                        text = "Bandung, Jawa Barat",
+                        fontWeight = FontWeight.Normal,
+                        color = Color.White,
+                        fontSize = 18.sp,
+                        modifier = Modifier
+                            .padding(start = 5.dp)
                     )
                 }
-                Box(
+                Spacer(modifier = Modifier.height(8.dp))
+                ButtonEditProfil()
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
                     modifier = Modifier
-                        .size(100.dp)
-                        .clip(MaterialTheme.shapes.medium)
-                        .background(Color.White)
-                        .wrapContentSize(Alignment.BottomCenter)
-                )
-                {
-                    Text(
-                    text = stringResource(R.string.count_donor),
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Black,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .padding( 5.dp)
+                        .padding(40.dp)
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(MaterialTheme.shapes.medium)
+                            .background(Color.White)
+                            .wrapContentSize(Alignment.BottomCenter)
                     )
+                    {
+                        Text(
+                            text = stringResource(R.string.gol_darah),
+                            fontWeight = FontWeight.Normal,
+                            color = Color.Black,
+                            fontSize = 12.sp,
+                            modifier = Modifier
+                                .padding(5.dp)
+                        )
+                    }
+                    Box(
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(MaterialTheme.shapes.medium)
+                            .background(Color.White)
+                            .wrapContentSize(Alignment.BottomCenter)
+                    )
+                    {
+                        Text(
+                            text = stringResource(R.string.count_donor),
+                            fontWeight = FontWeight.Normal,
+                            color = Color.Black,
+                            fontSize = 12.sp,
+                            modifier = Modifier
+                                .padding(5.dp)
+                        )
+                    }
                 }
             }
         }
-    }
         ButtonLogout()
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {

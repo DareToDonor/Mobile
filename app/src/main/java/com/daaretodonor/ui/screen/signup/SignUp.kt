@@ -143,17 +143,48 @@ fun SignInForm(
                 .padding(16.dp),
         ) {
             Text(
-                text =  stringResource(R.string.join),
+                text = stringResource(R.string.join),
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.Black,
                 fontSize = 30.sp,
             )
-            SignUpTextField(label = stringResource(R.string.first_name), value = firstname, onValueChange = onFirstnameChange, keyboardType = KeyboardType.Text)
-            SignUpTextField(label = stringResource(R.string.last_name), value = lastname, onValueChange = onLastnameChange, keyboardType = KeyboardType.Text)
-            SignUpTextField(label = stringResource(R.string.username), value = username, onValueChange = onUsernameChange, keyboardType = KeyboardType.Text)
-            SignUpTextField(label = stringResource(R.string.email), value = email, onValueChange = onEmailChange, keyboardType = KeyboardType.Email)
-            SignUpTextField(label = stringResource(R.string.no_hp), value = phoneNumber, onValueChange = onPhoneNumberChange, keyboardType = KeyboardType.Phone)
-            SignUpTextField(label = stringResource(R.string.password), value = password, onValueChange = onPasswordChange, keyboardType = KeyboardType.Password, visualTransformation = PasswordVisualTransformation())
+            SignUpTextField(
+                label = stringResource(R.string.first_name),
+                value = firstname,
+                onValueChange = onFirstnameChange,
+                keyboardType = KeyboardType.Text
+            )
+            SignUpTextField(
+                label = stringResource(R.string.last_name),
+                value = lastname,
+                onValueChange = onLastnameChange,
+                keyboardType = KeyboardType.Text
+            )
+            SignUpTextField(
+                label = stringResource(R.string.username),
+                value = username,
+                onValueChange = onUsernameChange,
+                keyboardType = KeyboardType.Text
+            )
+            SignUpTextField(
+                label = stringResource(R.string.email),
+                value = email,
+                onValueChange = onEmailChange,
+                keyboardType = KeyboardType.Email
+            )
+            SignUpTextField(
+                label = stringResource(R.string.no_hp),
+                value = phoneNumber,
+                onValueChange = onPhoneNumberChange,
+                keyboardType = KeyboardType.Phone
+            )
+            SignUpTextField(
+                label = stringResource(R.string.password),
+                value = password,
+                onValueChange = onPasswordChange,
+                keyboardType = KeyboardType.Password,
+                visualTransformation = PasswordVisualTransformation()
+            )
             SignUpButton(onClick = {})
             Row(
                 modifier = Modifier
@@ -208,7 +239,13 @@ fun SignInForm(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpTextField(label: String, value: String, onValueChange: (String) -> Unit, keyboardType: KeyboardType, visualTransformation: VisualTransformation? = null) {
+fun SignUpTextField(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    keyboardType: KeyboardType,
+    visualTransformation: VisualTransformation? = null
+) {
     Text(
         text = label,
         fontWeight = FontWeight.Normal,

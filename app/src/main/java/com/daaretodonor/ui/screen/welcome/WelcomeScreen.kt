@@ -53,7 +53,7 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
                         .fillMaxWidth()
                         .padding(top = 100.dp),
 
-                ) {
+                    ) {
                     Image(
                         painter = painterResource(id = R.drawable.img_welcome),
                         contentDescription = "image welcome",

@@ -45,7 +45,8 @@ fun HomeScreen(
         Column(
             modifier = modifier
                 .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally)
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
         {
             Spacer(modifier = Modifier.height(30.dp))
             Text(
@@ -79,8 +80,8 @@ fun HomeScreen(
                     .clip(MaterialTheme.shapes.medium)
                     .background(Color.White)
                     .wrapContentSize(Alignment.BottomCenter)
-            ){
-                Row(  verticalAlignment = Alignment.CenterVertically) {
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_blood),
                         contentDescription = "image welcome",

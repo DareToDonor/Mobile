@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.daaretodonor.R
 
 @Composable
-fun ButtonCreateAccount (){
+fun ButtonCreateAccount() {
     Button(
         onClick = {
         },
@@ -25,11 +25,11 @@ fun ButtonCreateAccount (){
             .padding(top = 16.dp)
             .fillMaxWidth()
     ) {
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = stringResource(R.string.create_account),
-                fontWeight = FontWeight.Medium,
-                color = Color.Black
-            )
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(
+            text = stringResource(R.string.create_account),
+            fontWeight = FontWeight.Medium,
+            color = Color.Black
+        )
     }
 }

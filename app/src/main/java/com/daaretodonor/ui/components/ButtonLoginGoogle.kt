@@ -22,7 +22,7 @@ import com.daaretodonor.R
 
 @Composable
 fun ButtonLoginGoogle() {
-    Box() {
+    Box {
         OutlinedButton(
             onClick = {
             },
