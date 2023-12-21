@@ -35,7 +35,6 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
             try {
                 val response = repository.login(loginRequest)
                 _loginSuccess.value = response
-
                 saveSession(UserModel(email, response.token, true))
             } catch (e: Exception) {
                 _loginError.value = e.message

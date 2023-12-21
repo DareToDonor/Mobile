@@ -86,9 +86,9 @@ fun WelcomeScreen(
                         .fillMaxWidth(0.8f)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                ButtonLoginGoogle()
+                ButtonLoginGoogle(navController = navController)
                 Spacer(modifier = Modifier.height(8.dp))
-                ButtonCreateAccount()
+                ButtonCreateAccount(navController = navController)
                 Spacer(modifier = Modifier.weight(1f))
                 Row(
                     modifier = Modifier

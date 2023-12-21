@@ -33,6 +33,7 @@ import com.daaretodonor.ui.screen.history.HistoryScreen
 import com.daaretodonor.ui.screen.home.HomeScreen
 import com.daaretodonor.ui.screen.newsAndEvent.NewsAndEvent
 import com.daaretodonor.ui.screen.profil.ProfileScreen
+import com.daaretodonor.ui.screen.signup.SignUp
 import com.daaretodonor.ui.screen.welcome.WelcomeScreen
 import com.daaretodonor.ui.signin.SignIn
 import com.daaretodonor.ui.theme.DaareToDonorTheme
@@ -57,7 +58,10 @@ fun DareToDonor() {
                         WelcomeScreen(navController = navController)
                     }
                     composable(Screen.Login.route) {
-                        SignIn()
+                        SignIn(navController = navController)
+                    }
+                    composable(Screen.Register.route) {
+                        SignUp(navController = navController)
                     }
                 }
             }

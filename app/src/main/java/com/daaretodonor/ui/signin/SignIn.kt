@@ -3,9 +3,12 @@ package com.daaretodonor.ui.signin
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
@@ -21,11 +24,13 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.daaretodonor.R
 import com.daaretodonor.di.Injection
 import com.daaretodonor.model.UserModel
 import com.daaretodonor.model.UserPreference
 import com.daaretodonor.model.dataStore
+import com.daaretodonor.navigation.NavigationItem.Screen
 import com.daaretodonor.ui.LoginViewModel
 import com.daaretodonor.ui.screen.ViewModelFactory
 import com.daaretodonor.ui.theme.MainColor
@@ -34,7 +39,7 @@ import com.daaretodonor.ui.theme.MainColor
 @Composable
 fun SignIn(
     modifier: Modifier = Modifier,
-
+    navController: NavHostController,
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -46,7 +51,7 @@ fun SignIn(
     val userPreference = UserPreference.getInstance(LocalContext.current.dataStore)
 
     val token by userPreference.getSession().collectAsState(initial = UserModel("", "", false))
-    Log.d("SavedToken", "Token: ${token.isLogin}")
+    Log.d("SavedToken", "Token: ${token.token}")
 
 
 
@@ -59,13 +64,20 @@ fun SignIn(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_arrow),
-                contentDescription = "image back",
+            Box(
                 modifier = Modifier
-                    .padding(top = 30.dp, start = 15.dp)
+                    .padding(top = 15.dp, start = 15.dp)
                     .size(30.dp)
-            )
+                    .clickable {
+                        navController.navigate(Screen.Welcome.route)
+                    }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.White
+                )
+            }
             Spacer(modifier = Modifier.height(15.dp))
             Text(
                 modifier = Modifier.padding(20.dp),
@@ -84,6 +96,7 @@ fun SignIn(
                 onPasswordChange = { password = it },
                 onSignInClick = {
                     viewModel.login(email, password)
+                    Log.d("aku","$email")
                 },
                 showPassword = showPassword,
                 onTogglePasswordVisibility = { showPassword = !showPassword }

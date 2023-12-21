@@ -2,6 +2,7 @@ package com.daaretodonor.ui.screen.signup
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,15 +14,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -45,20 +46,20 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.daaretodonor.R
+import com.daaretodonor.navigation.NavigationItem.Screen
 import com.daaretodonor.ui.components.ButtonLoginGoogle
 import com.daaretodonor.ui.theme.DaareToDonorTheme
 import com.daaretodonor.ui.theme.MainColor
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun SignUp(modifier: Modifier = Modifier) {
+fun SignUp(modifier: Modifier = Modifier, navController: NavHostController,) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
     var username by remember { mutableStateOf("") }
-    var firstname by remember { mutableStateOf("") }
-    var lastname by remember { mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
 
     Box(
@@ -66,47 +67,45 @@ fun SignUp(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(MainColor)
     ) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState())
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center
         ) {
-            item {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_arrow),
-                    contentDescription = "image back",
-                    modifier = Modifier
-                        .padding(top = 30.dp, start = 15.dp)
-                        .size(30.dp)
-                )
-                Spacer(modifier = Modifier.height(15.dp))
-                Text(
-                    modifier = Modifier.padding(20.dp),
-                    text = stringResource(R.string.signin),
-                    fontWeight = FontWeight.ExtraBold,
-                    color = Color.White,
-                    fontSize = 30.sp
+            Box(
+                modifier = Modifier
+                    .padding(top = 15.dp, start = 15.dp)
+                    .size(30.dp)
+                    .clickable {
+                        navController.navigate(Screen.Welcome.route)
+                    }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.White
                 )
             }
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                modifier = Modifier.padding(20.dp),
+                text = stringResource(R.string.signin),
+                fontWeight = FontWeight.ExtraBold,
+                color = Color.White,
+                fontSize = 30.sp
+            )
 
-            item {
-                Spacer(modifier = Modifier.height(10.dp))
-                SignInForm(
-                    email = email,
-                    onEmailChange = { email = it },
-                    password = password,
-                    onPasswordChange = { password = it },
-                    phoneNumber = phoneNumber,
-                    onPhoneNumberChange = { phoneNumber = it },
-                    username = username,
-                    onUsernameChange = { username = it },
-                    firstname = firstname,
-                    onFirstnameChange = { firstname = it },
-                    lastname = lastname,
-                    onLastnameChange = { lastname = it }
-                )
-            }
+            Spacer(modifier = Modifier.height(5.dp))
+            SignInForm(
+                email = email,
+                onEmailChange = { email = it },
+                password = password,
+                navController = navController,
+                onPasswordChange = { password = it },
+                phoneNumber = phoneNumber,
+                onPhoneNumberChange = { phoneNumber = it },
+                username = username,
+                onUsernameChange = { username = it }
+            )
         }
     }
 }
@@ -116,15 +115,12 @@ fun SignInForm(
     email: String,
     onEmailChange: (String) -> Unit,
     password: String,
+    navController: NavHostController,
     onPasswordChange: (String) -> Unit,
     phoneNumber: String,
     onPhoneNumberChange: (String) -> Unit,
     username: String,
-    onUsernameChange: (String) -> Unit,
-    firstname: String,
-    onFirstnameChange: (String) -> Unit,
-    lastname: String,
-    onLastnameChange: (String) -> Unit
+    onUsernameChange: (String) -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -143,48 +139,15 @@ fun SignInForm(
                 .padding(16.dp),
         ) {
             Text(
-                text = stringResource(R.string.join),
+                text =  stringResource(R.string.join),
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.Black,
                 fontSize = 30.sp,
             )
-            SignUpTextField(
-                label = stringResource(R.string.first_name),
-                value = firstname,
-                onValueChange = onFirstnameChange,
-                keyboardType = KeyboardType.Text
-            )
-            SignUpTextField(
-                label = stringResource(R.string.last_name),
-                value = lastname,
-                onValueChange = onLastnameChange,
-                keyboardType = KeyboardType.Text
-            )
-            SignUpTextField(
-                label = stringResource(R.string.username),
-                value = username,
-                onValueChange = onUsernameChange,
-                keyboardType = KeyboardType.Text
-            )
-            SignUpTextField(
-                label = stringResource(R.string.email),
-                value = email,
-                onValueChange = onEmailChange,
-                keyboardType = KeyboardType.Email
-            )
-            SignUpTextField(
-                label = stringResource(R.string.no_hp),
-                value = phoneNumber,
-                onValueChange = onPhoneNumberChange,
-                keyboardType = KeyboardType.Phone
-            )
-            SignUpTextField(
-                label = stringResource(R.string.password),
-                value = password,
-                onValueChange = onPasswordChange,
-                keyboardType = KeyboardType.Password,
-                visualTransformation = PasswordVisualTransformation()
-            )
+            SignUpTextField(label = stringResource(R.string.username), value = username, onValueChange = onUsernameChange, keyboardType = KeyboardType.Text)
+            SignUpTextField(label = stringResource(R.string.email), value = email, onValueChange = onEmailChange, keyboardType = KeyboardType.Email)
+            SignUpTextField(label = stringResource(R.string.no_hp), value = phoneNumber, onValueChange = onPhoneNumberChange, keyboardType = KeyboardType.Phone)
+            SignUpTextField(label = stringResource(R.string.password), value = password, onValueChange = onPasswordChange, keyboardType = KeyboardType.Password, visualTransformation = PasswordVisualTransformation())
             SignUpButton(onClick = {})
             Row(
                 modifier = Modifier
@@ -211,7 +174,7 @@ fun SignInForm(
                         .height(1.dp)
                 )
             }
-            ButtonLoginGoogle()
+            ButtonLoginGoogle(navController = navController)
             Spacer(modifier = Modifier.weight(1f))
             Row(
                 modifier = Modifier
@@ -239,13 +202,7 @@ fun SignInForm(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignUpTextField(
-    label: String,
-    value: String,
-    onValueChange: (String) -> Unit,
-    keyboardType: KeyboardType,
-    visualTransformation: VisualTransformation? = null
-) {
+fun SignUpTextField(label: String, value: String, onValueChange: (String) -> Unit, keyboardType: KeyboardType, visualTransformation: VisualTransformation? = null) {
     Text(
         text = label,
         fontWeight = FontWeight.Normal,
@@ -276,13 +233,5 @@ fun SignUpButton(onClick: () -> Unit) {
             .fillMaxWidth()
     ) {
         Text(stringResource(id = R.string.daftar))
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun SignUpPreview() {
-    DaareToDonorTheme {
-        SignUp()
     }
 }

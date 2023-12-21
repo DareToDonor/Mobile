@@ -13,12 +13,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.daaretodonor.R
+import com.daaretodonor.navigation.NavigationItem.Screen
 
 @Composable
-fun ButtonCreateAccount() {
+fun ButtonCreateAccount(
+    navController: NavHostController,
+) {
     Button(
         onClick = {
+            navController.navigate(Screen.Register.route)
         },
         colors = ButtonDefaults.buttonColors(Color.White),
         modifier = Modifier

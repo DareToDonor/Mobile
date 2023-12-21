@@ -18,13 +18,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.daaretodonor.R
+import com.daaretodonor.navigation.NavigationItem.Screen
 
 @Composable
-fun ButtonLoginGoogle() {
+fun ButtonLoginGoogle(
+    navController: NavHostController,
+) {
     Box {
         OutlinedButton(
             onClick = {
+                navController.navigate(Screen.Login.route)
             },
             modifier = Modifier
                 .padding(top = 16.dp)
