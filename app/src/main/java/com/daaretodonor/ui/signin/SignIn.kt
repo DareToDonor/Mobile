@@ -8,7 +8,6 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -28,7 +27,7 @@ import com.daaretodonor.model.UserModel
 import com.daaretodonor.model.UserPreference
 import com.daaretodonor.model.dataStore
 import com.daaretodonor.ui.LoginViewModel
-import com.daaretodonor.ui.ViewModelFactory
+import com.daaretodonor.ui.screen.ViewModelFactory
 import com.daaretodonor.ui.theme.MainColor
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterial3Api::class)
@@ -41,12 +40,13 @@ fun SignIn(
     var password by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
     val viewModel: LoginViewModel = viewModel(factory = ViewModelFactory(Injection.provideRepository(
-        LocalContext.current)))
+        LocalContext.current))
+    )
 
     val userPreference = UserPreference.getInstance(LocalContext.current.dataStore)
 
     val token by userPreference.getSession().collectAsState(initial = UserModel("", "", false))
-    Log.d("SavedToken", "Token: ${token.token}")
+    Log.d("SavedToken", "Token: ${token.isLogin}")
 
 
 

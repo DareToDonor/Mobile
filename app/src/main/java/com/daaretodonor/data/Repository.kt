@@ -1,6 +1,5 @@
 package com.daaretodonor.data
 
-import ApiConfig
 import com.daaretodonor.data.api.ApiService
 import com.daaretodonor.data.api.LoginRequest
 import com.daaretodonor.data.response.login.LoginResponse

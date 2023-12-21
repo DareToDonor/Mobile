@@ -1,9 +1,10 @@
-package com.daaretodonor.ui
+package com.daaretodonor.ui.screen
 
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.daaretodonor.data.Repository
+import com.daaretodonor.ui.LoginViewModel
 
 
 class ViewModelFactory(private val repository: Repository) :
