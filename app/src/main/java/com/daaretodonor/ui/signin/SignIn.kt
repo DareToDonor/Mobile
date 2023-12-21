@@ -6,15 +6,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.*
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +24,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.daaretodonor.R
 import com.daaretodonor.di.Injection
+import com.daaretodonor.model.UserModel
+import com.daaretodonor.model.UserPreference
+import com.daaretodonor.model.dataStore
 import com.daaretodonor.ui.LoginViewModel
 import com.daaretodonor.ui.ViewModelFactory
 import com.daaretodonor.ui.theme.MainColor
@@ -34,13 +35,18 @@ import com.daaretodonor.ui.theme.MainColor
 @Composable
 fun SignIn(
     modifier: Modifier = Modifier,
-    viewModel: LoginViewModel = viewModel(
-        factory = ViewModelFactory(Injection.provideRepository())
-    ),
+
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var showPassword by remember { mutableStateOf(false) }
+    val viewModel: LoginViewModel = viewModel(factory = ViewModelFactory(Injection.provideRepository(
+        LocalContext.current)))
+
+    val userPreference = UserPreference.getInstance(LocalContext.current.dataStore)
+
+    val token by userPreference.getSession().collectAsState(initial = UserModel("", "", false))
+    Log.d("SavedToken", "Token: ${token.token}")
 
 
 
@@ -82,12 +88,6 @@ fun SignIn(
                 showPassword = showPassword,
                 onTogglePasswordVisibility = { showPassword = !showPassword }
             )
-
-            viewModel.loginSuccess.observeAsState().value?.let { loginResponse ->
-                Log.d("respon", "$loginResponse")
-            }
-
-
         }
     }
 }
