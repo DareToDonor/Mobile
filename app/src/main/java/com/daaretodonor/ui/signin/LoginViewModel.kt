@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavHostController
 import com.daaretodonor.data.Repository
 import com.daaretodonor.data.api.LoginRequest
 import com.daaretodonor.data.response.login.LoginResponse
 import com.daaretodonor.model.UserModel
+import com.daaretodonor.navigation.NavigationItem.Screen
 import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: Repository) : ViewModel() {
@@ -25,7 +27,7 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
     private val loginError: LiveData<String>
         get() = _loginError
 
-    fun login(email: String, password: String) {
+    fun login(email: String, password: String, navController: NavHostController) {
         val loginRequest = LoginRequest(
             email = email,
             password = password
@@ -36,6 +38,7 @@ class LoginViewModel(private val repository: Repository) : ViewModel() {
                 val response = repository.login(loginRequest)
                 _loginSuccess.value = response
                 saveSession(UserModel(email, response.token, true))
+                navController.navigate(Screen.Home.route)
             } catch (e: Exception) {
                 _loginError.value = e.message
             }

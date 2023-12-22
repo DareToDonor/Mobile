@@ -50,10 +50,6 @@ fun SignIn(
 
     val userPreference = UserPreference.getInstance(LocalContext.current.dataStore)
 
-    val token by userPreference.getSession().collectAsState(initial = UserModel("", "", false))
-    Log.d("SavedToken", "Token: ${token.token}")
-
-
 
     Box(
         modifier = Modifier
@@ -95,8 +91,7 @@ fun SignIn(
                 password = password,
                 onPasswordChange = { password = it },
                 onSignInClick = {
-                    viewModel.login(email, password)
-                    Log.d("aku","$email")
+                    viewModel.login(email, password, navController)
                 },
                 showPassword = showPassword,
                 onTogglePasswordVisibility = { showPassword = !showPassword }

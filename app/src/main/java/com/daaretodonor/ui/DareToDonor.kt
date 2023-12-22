@@ -1,5 +1,6 @@
 package com.daaretodonor.ui
 
+import android.media.session.MediaSession.Token
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,7 +35,9 @@ import com.daaretodonor.ui.screen.history.HistoryScreen
 import com.daaretodonor.ui.screen.home.HomeScreen
 import com.daaretodonor.ui.screen.newsAndEvent.NewsAndEvent
 import com.daaretodonor.ui.screen.profil.ProfileScreen
+import com.daaretodonor.ui.screen.signup.SignUp
 import com.daaretodonor.ui.screen.welcome.WelcomeScreen
+import com.daaretodonor.ui.signin.SignIn
 import com.daaretodonor.ui.theme.DaareToDonorTheme
 
 
@@ -51,7 +54,7 @@ fun DareToDonor(
     val currentRoute = navBackStackEntry?.destination?.route
     Scaffold(
         bottomBar = {
-            if (currentRoute != Screen.Welcome.route && currentRoute != Screen.Donor.route) {
+            if (currentRoute != Screen.Welcome.route && currentRoute != Screen.Donor.route && currentRoute != Screen.Login.route && currentRoute != Screen.Register.route) {
                 BottomBar(navController = navController)
             }
         },
@@ -59,7 +62,7 @@ fun DareToDonor(
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination =  Screen.Home.route ,
+            startDestination =  if (token.isLogin) Screen.Home.route else Screen.Welcome.route ,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
@@ -74,11 +77,19 @@ fun DareToDonor(
             composable(Screen.Donor.route) {
                 Donor(navController = navController)
             }
+            composable(Screen.Register.route) {
+                SignUp(navController = navController)
+            }
+
+
             composable(Screen.Welcome.route) {
                 WelcomeScreen(navController = navController)
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(navController = navController)
+            }
+            composable(Screen.Login.route) {
+                SignIn(navController = navController)
             }
         }
     }
