@@ -10,4 +10,5 @@ sealed class Screen(val route: String) {
     object Login : Screen("login")
     object Register : Screen("register")
     object Donor : Screen("donor")
+    object DateSelection : Screen("dataselection")
 }

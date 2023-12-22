@@ -34,8 +34,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import com.daaretodonor.R
 import com.daaretodonor.di.Injection
+import com.daaretodonor.navigation.NavigationItem.Screen
 import com.daaretodonor.ui.components.LocationAdapter
 import com.daaretodonor.ui.screen.ViewModelFactory
 import com.daaretodonor.ui.theme.MainColor
@@ -43,6 +45,7 @@ import com.daaretodonor.ui.theme.MainColor
 @Composable
 fun Donor(
     modifier: Modifier = Modifier,
+    navController: NavHostController,
     viewModel: DonorViewModel = viewModel(factory = ViewModelFactory(Injection.provideRepository(LocalContext.current)))
 
 
@@ -71,6 +74,7 @@ fun Donor(
                         modifier = Modifier
                             .size(50.dp)
                             .clickable {
+                                navController.navigate(Screen.Home.route)
                             }
                     ) {
                         Icon(

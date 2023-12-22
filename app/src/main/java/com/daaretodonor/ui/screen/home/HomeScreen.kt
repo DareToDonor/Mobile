@@ -83,7 +83,7 @@ fun HomeScreen(
                     .background(Color.White)
                     .wrapContentSize(Alignment.BottomCenter)
                     .clickable {
-                        navController.navigate(Screen.Donor.route)
+                        navController.navigate(Screen.DateSelection.route)
                     }
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {

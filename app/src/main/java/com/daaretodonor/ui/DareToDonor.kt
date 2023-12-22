@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,59 +34,32 @@ import com.daaretodonor.ui.screen.history.HistoryScreen
 import com.daaretodonor.ui.screen.home.HomeScreen
 import com.daaretodonor.ui.screen.newsAndEvent.NewsAndEvent
 import com.daaretodonor.ui.screen.profil.ProfileScreen
-import com.daaretodonor.ui.screen.signup.SignUp
 import com.daaretodonor.ui.screen.welcome.WelcomeScreen
-import com.daaretodonor.ui.signin.SignIn
 import com.daaretodonor.ui.theme.DaareToDonorTheme
 
 
-@Composable
-fun DareToDonor() {
-    val navController = rememberNavController()
-    val userPreference = UserPreference.getInstance(LocalContext.current.dataStore)
-    val token by userPreference.getSession().collectAsState(initial = UserModel("", "", false))
-
-    Log.d("token","$token")
-    DaareToDonorTheme {
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background
-        ) {
-            if (token.token > "") {
-                Aplication(navController)
-            } else {
-                NavHost(navController = navController, startDestination = Screen.Welcome.route) {
-                    composable(Screen.Welcome.route) {
-                        WelcomeScreen(navController = navController)
-                    }
-                    composable(Screen.Login.route) {
-                        SignIn(navController = navController)
-                    }
-                    composable(Screen.Register.route) {
-                        SignUp(navController = navController)
-                    }
-                }
-            }
-        }
-    }
-}
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Aplication(navController: NavHostController) {
+fun DareToDonor(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController(),
+) {
+    val userPreference = UserPreference.getInstance(LocalContext.current.dataStore)
+    val token by userPreference.getSession().collectAsState(initial = UserModel("", "", false))
     val navBackStackEntry by navController.currentBackStackEntryAsState()
+    Log.d("token", "$token")
     val currentRoute = navBackStackEntry?.destination?.route
-
     Scaffold(
         bottomBar = {
-            if (currentRoute != Screen.Donor.route) {
+            if (currentRoute != Screen.Welcome.route && currentRoute != Screen.Donor.route) {
                 BottomBar(navController = navController)
             }
         },
-        modifier = Modifier.fillMaxSize()
+        modifier = modifier
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Screen.Home.route,
+            startDestination =  Screen.Home.route ,
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
@@ -99,14 +71,14 @@ fun Aplication(navController: NavHostController) {
             composable(Screen.History.route) {
                 HistoryScreen()
             }
+            composable(Screen.Donor.route) {
+                Donor(navController = navController)
+            }
             composable(Screen.Welcome.route) {
                 WelcomeScreen(navController = navController)
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(navController = navController)
-            }
-            composable(Screen.Donor.route) {
-                Donor()
             }
         }
     }

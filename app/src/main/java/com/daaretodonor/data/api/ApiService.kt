@@ -16,7 +16,6 @@ interface ApiService {
     suspend fun getUserData(): UserResponse
     @GET("donors/locations")
     suspend fun getLocations(): Response<LocationResponse>
-
 }
 
 data class LoginRequest(
