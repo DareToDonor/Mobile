@@ -37,4 +37,5 @@
     <string name="username">Username</string>
     <string name="no_hp">Nomor Hp</string>
     <string name="daftar">Daftar</string>
+    <string name="place">Pilih Tempat</string>
 </resources>

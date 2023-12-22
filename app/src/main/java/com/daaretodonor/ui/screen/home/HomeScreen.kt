@@ -2,6 +2,7 @@ package com.daaretodonor.ui.screen.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,17 +26,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.daaretodonor.R
-import com.daaretodonor.ui.theme.DaareToDonorTheme
+import com.daaretodonor.navigation.NavigationItem.Screen
 import com.daaretodonor.ui.theme.MainColor
 
 
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    navController: NavHostController,
 ) {
     Box(
         modifier = modifier
@@ -80,6 +82,9 @@ fun HomeScreen(
                     .clip(MaterialTheme.shapes.medium)
                     .background(Color.White)
                     .wrapContentSize(Alignment.BottomCenter)
+                    .clickable {
+                        navController.navigate(Screen.Donor.route)
+                    }
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Image(
@@ -127,13 +132,5 @@ fun HomeScreen(
                 )
             }
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    DaareToDonorTheme {
-        HomeScreen()
     }
 }

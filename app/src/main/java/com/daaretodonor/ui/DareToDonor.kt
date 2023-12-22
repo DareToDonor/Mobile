@@ -1,5 +1,6 @@
 package com.daaretodonor.ui
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,6 +30,7 @@ import com.daaretodonor.model.UserPreference
 import com.daaretodonor.model.dataStore
 import com.daaretodonor.navigation.NavigationItem.NavigationItem
 import com.daaretodonor.navigation.NavigationItem.Screen
+import com.daaretodonor.ui.screen.donor.Donor
 import com.daaretodonor.ui.screen.history.HistoryScreen
 import com.daaretodonor.ui.screen.home.HomeScreen
 import com.daaretodonor.ui.screen.newsAndEvent.NewsAndEvent
@@ -45,12 +47,13 @@ fun DareToDonor() {
     val userPreference = UserPreference.getInstance(LocalContext.current.dataStore)
     val token by userPreference.getSession().collectAsState(initial = UserModel("", "", false))
 
+    Log.d("token","$token")
     DaareToDonorTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            if (token.isLogin) {
+            if (token.token > "") {
                 Aplication(navController)
             } else {
                 NavHost(navController = navController, startDestination = Screen.Welcome.route) {
@@ -76,7 +79,9 @@ fun Aplication(navController: NavHostController) {
 
     Scaffold(
         bottomBar = {
-            BottomBar(navController = navController)
+            if (currentRoute != Screen.Donor.route) {
+                BottomBar(navController = navController)
+            }
         },
         modifier = Modifier.fillMaxSize()
     ) { innerPadding ->
@@ -86,7 +91,7 @@ fun Aplication(navController: NavHostController) {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(Screen.Home.route) {
-                HomeScreen()
+                HomeScreen(navController = navController)
             }
             composable(Screen.News.route) {
                 NewsAndEvent()
@@ -99,6 +104,9 @@ fun Aplication(navController: NavHostController) {
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(navController = navController)
+            }
+            composable(Screen.Donor.route) {
+                Donor()
             }
         }
     }

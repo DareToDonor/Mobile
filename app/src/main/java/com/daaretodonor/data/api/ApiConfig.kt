@@ -9,21 +9,6 @@ object ApiConfig {
 
     private const val BASE_URL = "https://daretodonor-backend-w565xl45jq-et.a.run.app/"
 
-    fun createApiService(): ApiService {
-        val loggingInterceptor =
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(
-                OkHttpClient.Builder()
-                    .addInterceptor(loggingInterceptor) // Tambahkan interceptor logging di sini
-                    .build()
-            )
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(ApiService::class.java)
-    }
 
     fun getApiService(token: String): ApiService {
         val loggingInterceptor =
